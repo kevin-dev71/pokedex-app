@@ -1,0 +1,287 @@
+{
+  "env": {
+    "browser": true,
+    "es2021": true,
+    "jest": true
+  },
+  "extends": [
+    "next",
+    "next/core-web-vitals",
+    "eslint:recommended",
+    "plugin:@typescript-eslint/recommended",
+    "plugin:prettier/recommended",
+    "plugin:jsx-a11y/recommended",
+    "plugin:react-hooks/recommended",
+    "standard-react",
+    "plugin:react/jsx-runtime",
+    "plugin:sonarjs/recommended",
+    "plugin:import/recommended"
+  ],
+  "parser": "@typescript-eslint/parser",
+  "parserOptions": {
+    "ecmaFeatures": {
+      "jsx": true
+    },
+    "ecmaVersion": "latest",
+    "sourceType": "module"
+  },
+  "plugins": [
+    "tailwindcss",
+    "react",
+    "sonarjs",
+    "@typescript-eslint",
+    "simple-import-sort",
+    "testing-library",
+    "jsx-a11y",
+    "import"
+  ],
+  "globals": {
+    "React": "readonly",
+    "NodeJS": "readonly"
+  },
+  "rules": {
+    "@typescript-eslint/no-explicit-any": "off",
+    "no-unused-expressions": "error",
+    "default-param-last": "error",
+    "testing-library/await-async-queries": "error",
+    "testing-library/no-await-sync-queries": "error",
+    "testing-library/no-debugging-utils": "warn",
+    "testing-library/no-dom-import": "off",
+    "import/prefer-default-export": "off",
+    "arrow-body-style": 0,
+    "quotes": [
+      2,
+      "double",
+      {
+        "avoidEscape": true
+      }
+    ],
+    "import/extensions": [
+      "error",
+      "ignorePackages",
+      {
+        "js": "never",
+        "jsx": "never",
+        "ts": "never",
+        "tsx": "never"
+      }
+    ],
+    "import/no-anonymous-default-export": "off",
+    "@typescript-eslint/consistent-type-imports": [
+      "error",
+      {
+        "prefer": "type-imports",
+        "disallowTypeAnnotations": true,
+        "fixStyle": "inline-type-imports"
+      }
+    ],
+    "jsx-a11y/label-has-associated-control": [
+      "error",
+      {
+        "required": {
+          "some": [
+            "nesting",
+            "id"
+          ]
+        }
+      }
+    ],
+    "jsx-a11y/label-has-for": [
+      "error",
+      {
+        "required": {
+          "some": [
+            "nesting",
+            "id"
+          ]
+        }
+      }
+    ],
+    "jsx-a11y/anchor-is-valid": [
+      "error",
+      {
+        "components": [
+          "Link"
+        ],
+        "specialLink": [
+          "hrefLeft",
+          "hrefRight"
+        ],
+        "aspects": [
+          "invalidHref",
+          "preferButton"
+        ]
+      }
+    ],
+    "jsx-a11y/no-noninteractive-element-interactions": "off",
+    "jsx-a11y/click-events-have-key-events": "off",
+    "@next/next/no-img-element": "off",
+    "no-anonymous-default-export": "off",
+    "no-else-return": "error",
+    "no-nested-ternary": "error",
+    "no-constant-condition": "warn",
+    "no-useless-return": "error",
+    "no-duplicate-imports": "error",
+    "react/no-array-index-key": "error",
+    "react/jsx-no-constructed-context-values": "warn",
+    "react/jsx-props-no-spreading": "off",
+    "require-jsdoc": "off",
+    "react/require-default-props": "off",
+    "react/jsx-uses-react": "off",
+    "react/react-in-jsx-scope": "off",
+    "react/prop-types": "off",
+    "react/self-closing-comp": "warn",
+    "react-hooks/exhaustive-deps": "warn",
+    "simple-import-sort/imports": "error",
+    "simple-import-sort/exports": "error",
+    "no-unused-vars": "off",
+    "@typescript-eslint/no-unused-vars": [
+      "error",
+      {
+        "argsIgnorePattern": "^_",
+        "varsIgnorePattern": "^_",
+        "caughtErrorsIgnorePattern": "^_"
+      }
+    ],
+    "no-shadow": "off",
+    "@typescript-eslint/no-shadow": [
+      "error",
+      {
+        "hoist": "all"
+      }
+    ],
+    "@typescript-eslint/no-non-null-assertion": "off",
+    "semi": [
+      2,
+      "never"
+    ],
+    "max-len": [
+      "warn",
+      {
+        "code": 120,
+        "tabWidth": 2,
+        "comments": 80,
+        "ignoreComments": true,
+        "ignoreTrailingComments": true,
+        "ignoreUrls": true,
+        "ignoreStrings": true,
+        "ignoreTemplateLiterals": true,
+        "ignoreRegExpLiterals": true
+      }
+    ],
+    "react/jsx-filename-extension": [
+      1,
+      {
+        "extensions": [
+          ".ts",
+          ".tsx"
+        ]
+      }
+    ],
+    "tailwindcss/no-custom-classname": [
+      "warn",
+      {
+        "whitelist": [
+          "^react-datepicker.*",
+          "date-button"
+        ]
+      }
+    ],
+    "tailwindcss/classnames-order": [
+      "warn"
+    ]
+  },
+  "overrides": [
+    {
+      "files": [
+        "**/*.js",
+        "**/*.ts",
+        "**/*.tsx"
+      ],
+      "rules": {
+        "simple-import-sort/imports": [
+          "error",
+          {
+            "groups": [
+              // `react` first, `next` second, then packages starting with a character
+              [
+                "whatwg-fetch",
+                "@testing-library/jest-dom",
+                "^react$",
+                "^next",
+                "^[a-z]",
+                "^@headlessui",
+                "^@reduxjs"
+              ],
+              // // Packages starting with `@`
+              // ["^@"],
+              // // Packages starting with `@/src`
+              // ["^(@|src)(/.*|$)"],
+              // // Packages starting with `@/src` and doesnot end with .scss
+              [
+                "^(@(?!.*\\.scss$)|@/src)"
+              ],
+              // Packages starting with `~`
+              [
+                "^~"
+              ],
+              // shared components
+              [
+                "^@(/.*)(shared)(/.*)"
+              ],
+              // services
+              [
+                "^@(/.*)(service|services)(/.*)"
+              ],
+              // hooks
+              [
+                "^@(/.*)(hooks)(/.*)"
+              ],
+              // Imports starting with `../`
+              [
+                "^\\.\\.(?!/?$)",
+                "^\\.\\./?$"
+              ],
+              // Imports starting with `./`
+              [
+                "^\\./(?=.*/)(?!/?$)",
+                "^\\.(?!/?$)",
+                "^\\./?$"
+              ],
+              // Side effect imports
+              [
+                "^\\u0000"
+              ],
+              // Style imports
+              [
+                "^(@|.)+\\.s?css$"
+              ],
+              // typescript interfaces
+              [
+                "^@(/.*)(interfaces|interface)(/.*)"
+              ]
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "files": [
+        "**/__test__/**/*.[jt]s?(x)",
+        "**/?(*.)+(spec|test).[jt]s?(x)"
+      ],
+      "extends": [
+        "plugin:testing-library/react",
+        "plugin:sonarjs/recommended"
+      ]
+    },
+    {
+      "files": [
+        "src/**/*.slice.ts"
+      ],
+      "rules": {
+        "no-param-reassign": "off"
+      }
+    }
+  ]
+}
