@@ -1,4 +1,15 @@
 /** @type {import('next').NextConfig} */
-const nextConfig = {};
+const nextConfig = {
+  swcMinify: true,
+  output: "standalone",
+  reactStrictMode: true,
+  typescript: {
+    ignoreBuildErrors: true,
+  },
+  poweredByHeader: false,
+  eslint: {
+    ignoreDuringBuilds: true,
+  },
+}
 
-export default nextConfig;
+export default nextConfig
