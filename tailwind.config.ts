@@ -8,12 +8,30 @@ const config: Config = {
   ],
   theme: {
     extend: {
+      colors: {
+        "identity-primary": "#DC0A2D",
+        grayscale: {
+          dark: "#212121",
+          medium: "#666666",
+          background: "#EFEFEF",
+        },
+      },
       backgroundImage: {
         "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",
         "gradient-conic": "conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))",
       },
     },
   },
-  plugins: [],
+  plugins: [
+    function ({ addUtilities }: any) {
+      const utilities = {
+        ".tw-grid-list": {
+          "container-type": "inline-size",
+        },
+      }
+
+      addUtilities(utilities)
+    },
+  ],
 }
 export default config
