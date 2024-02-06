@@ -15,6 +15,9 @@ const config: Config = {
           medium: "#666666",
           background: "#EFEFEF",
         },
+        "pokemon-type": {
+          bug: "#A7B723",
+        },
       },
       backgroundImage: {
         "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",

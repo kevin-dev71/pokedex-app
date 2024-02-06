@@ -1,6 +1,5 @@
 import PokemonListItem from "@/app/(pokemon)/_components/pokemon-list-item"
 import Pagination from "@/app/(ui)/_components/pagination"
-import PokeballIcon from "@/app/(ui)/_icons/pokeball-icon"
 import { fetchPokemons } from "@/server/pokeapi/actions/fetch-pokemons"
 
 export default async function Home({
@@ -30,13 +29,7 @@ export default async function Home({
 
   // RENDER
   return (
-    <main className="mx-auto flex min-h-screen w-full max-w-5xl flex-col gap-4 p-2 pb-10">
-      {/* NAVBAR */}
-      <nav className="flex items-center gap-5 p-4 text-white">
-        <PokeballIcon />
-        <h1 className="text-3xl font-bold">Pokédex</h1>
-      </nav>
-
+    <>
       {/* POKEMONLIST */}
       <section className="mx-auto grid w-full grid-flow-dense grid-cols-[repeat(auto-fit,minmax(180px,1fr))] gap-3 rounded-xl bg-white px-2 pb-3 pt-3">
         {results.map((pokemon) => {
@@ -49,6 +42,6 @@ export default async function Home({
       <Pagination
         options={{ total: count, viewingFromPage, viewingToPage, pagesCount, currentPage }}
       />
-    </main>
+    </>
   )
 }

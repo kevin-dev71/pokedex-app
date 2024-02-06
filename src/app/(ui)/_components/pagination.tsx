@@ -43,7 +43,7 @@ const Pagination = ({ options }: PaginationProps) => {
 
   return (
     <nav className="flex w-full items-center justify-center gap-2 font-semibold text-white">
-      <span>Filas por página</span>
+      <span>Rows per page</span>
       <select name="" className="text-grayscale-dark">
         <option value={20}>20</option>
       </select>

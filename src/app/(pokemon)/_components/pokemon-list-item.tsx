@@ -25,7 +25,7 @@ const PokemonListItem = async ({ pokemon, ...delegatedProps }: PokemonListItemPr
   return (
     <Suspense fallback={<LoadingListItem name={name} />}>
       <article
-        className="relative row-span-3 mx-2 grid grid-rows-subgrid rounded-xl bg-white px-2 pb-3 pt-3 shadow-xl"
+        className="relative row-span-4 mx-2 grid grid-rows-subgrid rounded-xl bg-white px-2 pb-3 pt-3 shadow-xl"
         {...delegatedProps}
       >
         <div
