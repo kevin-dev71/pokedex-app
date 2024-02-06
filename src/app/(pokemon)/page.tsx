@@ -16,7 +16,7 @@ export default async function Home() {
 
   // RENDER
   return (
-    <main className="mx-auto min-h-screen w-full max-w-5xl ">
+    <main className="mx-auto flex min-h-screen w-full max-w-5xl flex-col p-2">
       {/* NAVBAR */}
       <nav className="flex items-center gap-5 p-4 text-white">
         <PokeballIcon />
@@ -24,7 +24,7 @@ export default async function Home() {
       </nav>
 
       {/* POKEMONLIST */}
-      <section className="mx-auto grid w-full grid-flow-dense grid-cols-[repeat(auto-fit,180px)] gap-3 rounded-xl bg-white px-2 pb-3 pt-3">
+      <section className="mx-auto grid w-full grid-flow-dense grid-cols-[repeat(auto-fit,minmax(180px,1fr))] gap-3 rounded-xl bg-white px-2 pb-3 pt-3">
         {pokemonList}
       </section>
     </main>
