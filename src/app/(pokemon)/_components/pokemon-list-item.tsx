@@ -19,6 +19,7 @@ const PokemonListItem = async ({ pokemon, ...delegatedProps }: PokemonListItemPr
   const { sprites, id } = pokemonData
   const {
     other: { dream_world },
+    front_default,
   } = sprites
 
   return (
@@ -33,7 +34,11 @@ const PokemonListItem = async ({ pokemon, ...delegatedProps }: PokemonListItemPr
         />
         <span className="z-10 ml-auto text-grayscale-medium">#{id}</span>
         <div className="relative z-10 flex aspect-square w-full">
-          <Image fill src={dream_world.front_default ?? "/assets/img/no-image.svg"} alt={name} />
+          <Image
+            fill
+            src={dream_world.front_default ?? front_default ?? "/assets/img/no-image.svg"}
+            alt={name}
+          />
         </div>
         <span className="z-10 text-center font-semibold capitalize text-grayscale-dark">
           {name}
