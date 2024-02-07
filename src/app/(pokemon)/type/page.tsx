@@ -36,31 +36,43 @@ const PokemonTypePage = async ({
   })
 
   // APPLY FILTERS
-  const sortBy = searchParams.sortBy ?? ""
   let filteredPokemonsWithDataArr
+  const filtersArr = searchParams.filter
+    ? String(searchParams.filter)
+        .split(",")
+        .filter((el) => el !== "")
+    : []
+
+  const filteredArr = pokemonsWithDataArr.filter((pokemon) => {
+    const { types } = pokemon
+    const pokemonTypesName = types.map((type) => type.type.name)
+    return filtersArr.every((element) => pokemonTypesName.includes(element))
+  })
+  // APPLY SORT
+  const sortBy = searchParams.sortBy ?? ""
   switch (sortBy) {
     case "base_exp_asc":
-      filteredPokemonsWithDataArr = [...pokemonsWithDataArr].sort(
+      filteredPokemonsWithDataArr = [...filteredArr].sort(
         (a, b) => (a.base_experience ?? 0) - (b.base_experience ?? 0)
       )
       break
     case "base_exp_desc":
-      filteredPokemonsWithDataArr = [...pokemonsWithDataArr].sort(
+      filteredPokemonsWithDataArr = [...filteredArr].sort(
         (a, b) => (b.base_experience ?? 0) - (a.base_experience ?? 0)
       )
       break
     case "weight_asc":
-      filteredPokemonsWithDataArr = [...pokemonsWithDataArr].sort(
+      filteredPokemonsWithDataArr = [...filteredArr].sort(
         (a, b) => (a.weight ?? 0) - (b.weight ?? 0)
       )
       break
     case "weight_desc":
-      filteredPokemonsWithDataArr = [...pokemonsWithDataArr].sort(
+      filteredPokemonsWithDataArr = [...filteredArr].sort(
         (a, b) => (b.weight ?? 0) - (a.weight ?? 0)
       )
       break
     default:
-      filteredPokemonsWithDataArr = pokemonsWithDataArr
+      filteredPokemonsWithDataArr = filteredArr
   }
 
   return (

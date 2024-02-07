@@ -11,7 +11,7 @@ interface PokemonListItemProps extends React.ComponentPropsWithoutRef<"article">
 
 const PokemonListItem = async ({ pokemon, ...delegatedProps }: PokemonListItemProps) => {
   // UI ADAPT
-  const { sprites, id, base_experience, name, weight } = pokemon
+  const { sprites, id, base_experience, name, weight, types } = pokemon
   const {
     other: { dream_world },
     front_default,
@@ -20,7 +20,7 @@ const PokemonListItem = async ({ pokemon, ...delegatedProps }: PokemonListItemPr
   return (
     <Suspense fallback={<LoadingListItem name={name} />}>
       <article
-        className="relative row-span-4 mx-2 grid grid-rows-subgrid rounded-xl bg-white px-2 pb-3 pt-3 shadow-xl"
+        className="relative row-span-5 mx-2 grid grid-rows-subgrid rounded-xl bg-white px-2 pb-3 pt-3 shadow-xl"
         {...delegatedProps}
       >
         <div
@@ -38,13 +38,20 @@ const PokemonListItem = async ({ pokemon, ...delegatedProps }: PokemonListItemPr
         <span className="z-10 text-center font-semibold capitalize text-grayscale-dark">
           {name}
         </span>
-        <div className="flex items-center justify-between gap-1">
-          <span className="z-10 text-center font-semibold capitalize text-grayscale-dark">
-            Base XP: {base_experience ?? "---"}
-          </span>
-          <span className="z-10 text-center font-semibold capitalize text-grayscale-dark">
-            Weight: {weight ?? "---"}
-          </span>
+        <div className="flex flex-col gap-2">
+          <div className="flex items-center justify-between gap-1">
+            <span className="z-10 text-center font-semibold capitalize text-grayscale-dark">
+              Base XP: {base_experience ?? "---"}
+            </span>
+            <span className="z-10 text-center font-semibold capitalize text-grayscale-dark">
+              Weight: {weight ?? "---"}
+            </span>
+          </div>
+          <div className="flex items-center justify-between gap-1">
+            <span className="z-10 text-center text-sm font-semibold capitalize text-grayscale-dark">
+              Type: {types.map((type) => type.type.name).join(",")}
+            </span>
+          </div>
         </div>
       </article>
     </Suspense>

@@ -21,8 +21,10 @@ const PokemonTypesListItem = ({ pokemonTypes }: PokemonTypesListItemProps) => {
   const { name: pokemonTypeName } = pokemonTypes
   const filtersArr = selectedFilter.split(",")
   const active = filtersArr.includes(pokemonTypeName)
+  const isTypePage = url && name
+  const navigateBaseUrl = isTypePage ? "/type" : "/"
 
-  const navigationUrl = getBaseUrlWithQueryParams("/", {
+  const navigationUrl = getBaseUrlWithQueryParams(navigateBaseUrl, {
     url,
     name,
     sortBy: selectedSortBy,
