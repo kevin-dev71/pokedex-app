@@ -3,20 +3,15 @@ import Image from "next/image"
 import type PokeAPI from "pokedex-promise-v2"
 
 import Loading from "@/app/(ui)/_components/loading"
-import { fetchResource } from "@/server/pokeapi/actions/fetch-resource"
 
 interface PokemonListItemProps extends React.ComponentPropsWithoutRef<"article"> {
-  pokemon: PokeAPI.NamedAPIResource
+  pokemon: PokeAPI.Pokemon
+  sortBy: string
 }
 
 const PokemonListItem = async ({ pokemon, ...delegatedProps }: PokemonListItemProps) => {
-  const { name, url } = pokemon
-
-  // SERVICES
-  const pokemonData = await fetchResource<PokeAPI.Pokemon>(url)
-
   // UI ADAPT
-  const { sprites, id } = pokemonData
+  const { sprites, id, base_experience, name, weight } = pokemon
   const {
     other: { dream_world },
     front_default,
@@ -43,10 +38,19 @@ const PokemonListItem = async ({ pokemon, ...delegatedProps }: PokemonListItemPr
         <span className="z-10 text-center font-semibold capitalize text-grayscale-dark">
           {name}
         </span>
+        <div className="flex items-center justify-between gap-1">
+          <span className="z-10 text-center font-semibold capitalize text-grayscale-dark">
+            Base XP: {base_experience ?? "---"}
+          </span>
+          <span className="z-10 text-center font-semibold capitalize text-grayscale-dark">
+            Weight: {weight ?? "---"}
+          </span>
+        </div>
       </article>
     </Suspense>
   )
 }
+
 export default PokemonListItem
 
 const LoadingListItem = ({ name }: { name: string }) => {
