@@ -17,6 +17,7 @@ const PokemonTypesList = ({ pokemonTypes }: { pokemonTypes: PokeAPI.NamedAPIReso
   const url = searchParams.get("url")
   const page = searchParams.get("page") ?? 1
   const selectedSortBy = searchParams.get("sortBy") ?? ""
+  const selectedFilter = searchParams.get("filter") ?? ""
 
   // HANDLERS
   const handleListByType = ({ value, label }: ListByTypeOptionType) => {
@@ -28,6 +29,8 @@ const PokemonTypesList = ({ pokemonTypes }: { pokemonTypes: PokeAPI.NamedAPIReso
       name: selectedName,
       sortBy: selectedSortBy,
       page,
+      filter: selectValue ? undefined : selectedFilter,
+      // filter: selectedFilter,
     })
 
     navigate(navigateUrl)
@@ -39,7 +42,13 @@ const PokemonTypesList = ({ pokemonTypes }: { pokemonTypes: PokeAPI.NamedAPIReso
     const isTypePage = url && name
     const sortBy = e.target.value === "undefined" ? undefined : e.target.value
     const navigateBaseUrl = isTypePage ? "/type" : "/"
-    const navigateUrl = getBaseUrlWithQueryParams(navigateBaseUrl, { url, name, sortBy, page })
+    const navigateUrl = getBaseUrlWithQueryParams(navigateBaseUrl, {
+      url,
+      name,
+      sortBy,
+      page,
+      filter: selectedFilter,
+    })
 
     navigate(navigateUrl)
   }
@@ -69,13 +78,7 @@ const PokemonTypesList = ({ pokemonTypes }: { pokemonTypes: PokeAPI.NamedAPIReso
             ? null
             : pokemonTypes.map((pokemonType) => {
                 const { url: _url, name: _name } = pokemonType
-                return (
-                  <PokemonTypesListItem
-                    key={_url}
-                    pokemonTypes={pokemonType}
-                    active={_name === name}
-                  />
-                )
+                return <PokemonTypesListItem key={_url} pokemonTypes={pokemonType} />
               })}
         </div>
       </section>
