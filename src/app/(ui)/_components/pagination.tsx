@@ -1,9 +1,9 @@
 "use client"
 
 import { type ChangeEvent } from "react"
+import { useRouter } from "next/navigation"
 
 import { cn } from "@/lib/cn"
-import { navigate } from "@/server/pokeapi/actions/navigate"
 
 type PaginationProps = {
   options: {
@@ -19,17 +19,20 @@ const Pagination = ({ options }: PaginationProps) => {
   // Set params
   const { total, viewingFromPage, viewingToPage, pagesCount, currentPage } = options
 
+  // router
+  const router = useRouter()
+
   // HANDLERS
   const handlePagination = async (e: ChangeEvent<HTMLSelectElement>) => {
-    navigate(`/?page=${e.target.value}`)
+    router.push(`/?page=${e.target.value}`)
   }
 
   const handleNextPage = async () => {
-    navigate(`/?page=${currentPage + 1}`)
+    router.push(`/?page=${currentPage + 1}`)
   }
 
   const handlePreviousPage = async () => {
-    navigate(`/?page=${currentPage - 1}`)
+    router.push(`/?page=${currentPage - 1}`)
   }
   // calculate options for page select
   const pagesOptions = Array.from({ length: pagesCount }, (_, index) => {
@@ -53,7 +56,9 @@ const Pagination = ({ options }: PaginationProps) => {
         <span className="font-bold">{total}</span>
       </span>
       <button
-        className={cn("font-bold", { "text-grayscale-medium": currentPage === 1 })}
+        className={cn("font-bold", {
+          "text-grayscale-medium cursor-not-allowed": currentPage === 1,
+        })}
         disabled={currentPage === 1}
         onClick={handlePreviousPage}
       >
@@ -68,7 +73,9 @@ const Pagination = ({ options }: PaginationProps) => {
         {pagesOptions}
       </select>
       <button
-        className={cn("font-bold", { "text-grayscale-medium": currentPage === pagesCount })}
+        className={cn("font-bold", {
+          "text-grayscale-medium cursor-not-allowed": currentPage === pagesCount,
+        })}
         disabled={currentPage === pagesCount}
         onClick={handleNextPage}
       >
