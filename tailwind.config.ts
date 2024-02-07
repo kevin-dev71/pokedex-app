@@ -17,6 +17,7 @@ const config: Config = {
         },
         "pokemon-type": {
           bug: "#A7B723",
+          electric: "#FFCC00",
         },
       },
       backgroundImage: {
