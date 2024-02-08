@@ -100,8 +100,7 @@ export default async function Home({
           {filteredPokemonsWithDataArr.length === 0 && <PokemonListEmpty />}
           {/* LIST ITEMS RESULT */}
           {filteredPokemonsWithDataArr.map((pokemon) => {
-            const { url } = pokemon
-            return <PokemonListItem key={url} pokemon={pokemon} sortBy={String(sortBy)} />
+            return <PokemonListItem key={pokemon.id} pokemon={pokemon} sortBy={String(sortBy)} />
           })}
         </section>
       </Suspense>

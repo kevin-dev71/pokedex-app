@@ -82,8 +82,7 @@ const PokemonTypePage = async ({
         {filteredPokemonsWithDataArr.length === 0 && <PokemonListEmpty />}
         {/* LIST ALL */}
         {filteredPokemonsWithDataArr.map((pokemon) => {
-          const { url: _url } = pokemon
-          return <PokemonListItem key={_url} pokemon={pokemon} sortBy={String(sortBy)} />
+          return <PokemonListItem key={pokemon.id} pokemon={pokemon} sortBy={String(sortBy)} />
         })}
       </section>
     </Suspense>
