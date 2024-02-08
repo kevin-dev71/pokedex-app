@@ -9,7 +9,7 @@ interface PokemonListItemProps extends React.ComponentPropsWithoutRef<"article">
   sortBy: string
 }
 
-const PokemonListItem = async ({ pokemon, ...delegatedProps }: PokemonListItemProps) => {
+const PokemonListItem = async ({ pokemon, sortBy, ...delegatedProps }: PokemonListItemProps) => {
   // UI ADAPT
   const { sprites, id, base_experience, name, weight, types } = pokemon
   const {
@@ -18,7 +18,7 @@ const PokemonListItem = async ({ pokemon, ...delegatedProps }: PokemonListItemPr
   } = sprites
 
   return (
-    <Suspense fallback={<LoadingListItem name={name} />}>
+    <Suspense key={sortBy + name} fallback={<LoadingListItem name={name} />}>
       <article
         className="relative row-span-5 mx-2 grid grid-rows-subgrid rounded-xl bg-white px-2 pb-3 pt-3 shadow-xl"
         {...delegatedProps}

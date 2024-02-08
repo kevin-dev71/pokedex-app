@@ -76,7 +76,7 @@ const PokemonTypesList = ({ pokemonTypes }: { pokemonTypes: PokeAPI.NamedAPIReso
         <div className="flex flex-wrap items-center gap-3">
           {pokemonTypes.map((pokemonType) => {
             const { url: _url, name: _name } = pokemonType
-            return <PokemonTypesListItem key={_url} pokemonTypes={pokemonType} />
+            return <PokemonTypesListItem key={_url + name} pokemonTypes={pokemonType} />
           })}
         </div>
       </section>
