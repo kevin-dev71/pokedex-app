@@ -1,12 +1,11 @@
 "use client"
 
-import { useSearchParams } from "next/navigation"
+import { useRouter, useSearchParams } from "next/navigation"
 import type PokeAPI from "pokedex-promise-v2"
 
 import PokemonTypesListItem from "@/app/(pokemon)/_components/pokemon-types-list-item"
 import Dropdown from "@/app/(ui)/_components/dropdown"
 import { getBaseUrlWithQueryParams } from "@/lib/getBaseUrlWithQueryParams"
-import { navigate } from "@/server/pokeapi/actions/navigate"
 
 type ListByTypeOptionType = { label: string; value: string | undefined }
 
@@ -18,6 +17,7 @@ const PokemonTypesList = ({ pokemonTypes }: { pokemonTypes: PokeAPI.NamedAPIReso
   const page = searchParams.get("page") ?? 1
   const selectedSortBy = searchParams.get("sortBy") ?? ""
   const selectedFilter = searchParams.get("filter") ?? ""
+  const router = useRouter()
 
   // HANDLERS
   const handleListByType = ({ value, label }: ListByTypeOptionType) => {
@@ -33,7 +33,7 @@ const PokemonTypesList = ({ pokemonTypes }: { pokemonTypes: PokeAPI.NamedAPIReso
       // filter: selectedFilter,
     })
 
-    navigate(navigateUrl)
+    router.push(navigateUrl)
   }
 
   const handleSortBy = async (e: React.ChangeEvent<HTMLSelectElement>) => {
@@ -50,7 +50,7 @@ const PokemonTypesList = ({ pokemonTypes }: { pokemonTypes: PokeAPI.NamedAPIReso
       filter: selectedFilter,
     })
 
-    navigate(navigateUrl)
+    router.push(navigateUrl)
   }
 
   // UI ADAPT
