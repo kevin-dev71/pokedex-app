@@ -17,18 +17,19 @@
     "prepare": "husky"
   },
   "dependencies": {
+    "@tanstack/react-query": "^5.18.1",
     "clsx": "^2.1.0",
     "next": "14.1.0",
     "pokedex-promise-v2": "^4.2.0",
     "react": "^18",
     "react-dom": "^18",
-    "react-query": "^3.39.3",
     "react-select": "^5.8.0",
     "tailwind-merge": "^2.2.1"
   },
   "devDependencies": {
     "@next/eslint-plugin-next": "^14.1.0",
     "@tailwindcss/container-queries": "0.1.1",
+    "@tanstack/react-query-devtools": "^5.18.1",
     "@testing-library/jest-dom": "^6.4.1",
     "@testing-library/react": "^14.2.1",
     "@testing-library/user-event": "^14.5.2",

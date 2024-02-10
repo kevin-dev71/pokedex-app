@@ -7,6 +7,7 @@ import { cn } from "@/lib/cn"
 import PokemonTypesList from "@/modules/pokemon/_components/pokemon-types-list"
 import LayoutSkeleton from "@/modules/pokemon/_components/skeletons/layout-skeleton"
 import PokemonTypesListSkeleton from "@/modules/pokemon/_components/skeletons/pokemon-types-list-skeleton"
+import AppProviders from "@/modules/providers/app-providers"
 import PokeballIcon from "@/modules/ui/_icons/pokeball-icon"
 import { fetchPokemonTypesList } from "@/server/pokeapi/actions/fetch-pokemon-types-list"
 
@@ -31,22 +32,24 @@ export default async function RootLayout({
   return (
     <html lang="en">
       <body className={cn(inter.className, "bg-identity-primary")}>
-        <Suspense fallback={<LayoutSkeleton />}>
-          <main className="mx-auto flex min-h-screen w-full max-w-5xl flex-col gap-4 p-2 pb-10">
-            {/* NAVBAR */}
-            <nav>
-              <Link href="/" className="flex w-fit items-center gap-5 p-4 text-white">
-                <PokeballIcon />
-                <h1 className="text-3xl font-bold">Pokédex</h1>
-              </Link>
-            </nav>
-            {/* POKEMON TYPES LIST */}
-            <Suspense key="list" fallback={<PokemonTypesListSkeleton />}>
-              <PokemonTypesList pokemonTypes={pokemonsTypes} />
-            </Suspense>
-            {children}
-          </main>
-        </Suspense>
+        <AppProviders>
+          <Suspense fallback={<LayoutSkeleton />}>
+            <main className="mx-auto flex min-h-screen w-full max-w-5xl flex-col gap-4 p-2 pb-10">
+              {/* NAVBAR */}
+              <nav>
+                <Link href="/" className="flex w-fit items-center gap-5 p-4 text-white">
+                  <PokeballIcon />
+                  <h1 className="text-3xl font-bold">Pokédex</h1>
+                </Link>
+              </nav>
+              {/* POKEMON TYPES LIST */}
+              <Suspense key="list" fallback={<PokemonTypesListSkeleton />}>
+                <PokemonTypesList pokemonTypes={pokemonsTypes} />
+              </Suspense>
+              {children}
+            </main>
+          </Suspense>
+        </AppProviders>
       </body>
     </html>
   )
