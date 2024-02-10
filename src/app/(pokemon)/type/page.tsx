@@ -4,6 +4,7 @@ import type PokeAPI from "pokedex-promise-v2"
 import PokemonListEmpty from "@/modules/pokemon/_components/empty-states/pokemon-list-empty"
 import PokemonListItem from "@/modules/pokemon/_components/pokemon-list-item"
 import PokemonListSkeleton from "@/modules/pokemon/_components/skeletons/pokemon-list-skeleton"
+import { filterAndSortPokemons } from "@/modules/pokemon/utils/filter-and-sort-pokemons"
 import { fetchResource } from "@/server/pokeapi/actions/fetch-resource"
 
 const PokemonTypePage = async ({
@@ -36,47 +37,15 @@ const PokemonTypePage = async ({
   })
 
   // APPLY FILTERS
-  let filteredPokemonsWithDataArr
-  const filtersArr = searchParams.filter
-    ? String(searchParams.filter)
-        .split(",")
-        .filter((el) => el !== "")
-    : []
-
-  const filteredArr = pokemonsWithDataArr.filter((pokemon) => {
-    const { types } = pokemon
-    const pokemonTypesName = types.map((type) => type.type.name)
-    return filtersArr.every((element) => pokemonTypesName.includes(element))
+  const filteredPokemonsWithDataArr = filterAndSortPokemons({
+    pokemons: pokemonsWithDataArr,
+    searchParams,
   })
-  // APPLY SORT
+
   const sortBy = searchParams.sortBy ?? ""
-  switch (sortBy) {
-    case "base_exp_asc":
-      filteredPokemonsWithDataArr = [...filteredArr].sort(
-        (a, b) => (a.base_experience ?? 0) - (b.base_experience ?? 0)
-      )
-      break
-    case "base_exp_desc":
-      filteredPokemonsWithDataArr = [...filteredArr].sort(
-        (a, b) => (b.base_experience ?? 0) - (a.base_experience ?? 0)
-      )
-      break
-    case "weight_asc":
-      filteredPokemonsWithDataArr = [...filteredArr].sort(
-        (a, b) => (a.weight ?? 0) - (b.weight ?? 0)
-      )
-      break
-    case "weight_desc":
-      filteredPokemonsWithDataArr = [...filteredArr].sort(
-        (a, b) => (b.weight ?? 0) - (a.weight ?? 0)
-      )
-      break
-    default:
-      filteredPokemonsWithDataArr = filteredArr
-  }
 
   return (
-    <Suspense key={String(url)} fallback={<PokemonListSkeleton />}>
+    <Suspense fallback={<PokemonListSkeleton />}>
       <section className="mx-auto grid w-full grid-flow-dense grid-cols-[repeat(auto-fit,minmax(180px,1fr))] gap-3 rounded-xl bg-white px-2 pb-3 pt-3">
         {/* EMPTY STATE */}
         {filteredPokemonsWithDataArr.length === 0 && <PokemonListEmpty />}
