@@ -2,7 +2,7 @@ import { Suspense } from "react"
 import Image from "next/image"
 import type PokeAPI from "pokedex-promise-v2"
 
-import Loading from "@/app/(ui)/_components/loading"
+import Loading from "@/modules/ui/_components/loading"
 
 interface PokemonListItemProps extends React.ComponentPropsWithoutRef<"article"> {
   pokemon: PokeAPI.Pokemon

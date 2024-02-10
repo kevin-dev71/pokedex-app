@@ -1,6 +1,6 @@
 import PokemonListSkeleton from "@/app/(pokemon)/_components/skeletons/pokemon-list-skeleton"
 import PokemonTypesListSkeleton from "@/app/(pokemon)/_components/skeletons/pokemon-types-list-skeleton"
-import PokeballIcon from "@/app/(ui)/_icons/pokeball-icon"
+import PokeballIcon from "@/modules/ui/_icons/pokeball-icon"
 
 const LayoutSkeleton = () => {
   return (

@@ -4,8 +4,8 @@ import { useRouter, useSearchParams } from "next/navigation"
 import type PokeAPI from "pokedex-promise-v2"
 
 import PokemonTypesListItem from "@/app/(pokemon)/_components/pokemon-types-list-item"
-import Dropdown from "@/app/(ui)/_components/dropdown"
 import { getBaseUrlWithQueryParams } from "@/lib/getBaseUrlWithQueryParams"
+import Dropdown from "@/modules/ui/_components/dropdown"
 
 type ListByTypeOptionType = { label: string; value: string | undefined }
 
