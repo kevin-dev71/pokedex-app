@@ -35,7 +35,9 @@ export default async function Home({
     results.map((result) => fetchResource<PokeAPI.Pokemon>(result.url))
   ).then((promiseResults) => {
     promiseResults.forEach((promiseResult) => {
-      if (promiseResult.status === "fulfilled") pokemonsWithDataArr.push(promiseResult.value)
+      if (promiseResult.status === "fulfilled") {
+        pokemonsWithDataArr.push(promiseResult.value)
+      }
     })
   })
 

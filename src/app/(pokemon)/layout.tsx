@@ -4,6 +4,7 @@ import { Inter } from "next/font/google"
 import Link from "next/link"
 
 import PokemonTypesList from "@/app/(pokemon)/_components/pokemon-types-list"
+import LayoutSkeleton from "@/app/(pokemon)/_components/skeletons/layout-skeleton"
 import PokemonTypesListSkeleton from "@/app/(pokemon)/_components/skeletons/pokemon-types-list-skeleton"
 import PokeballIcon from "@/app/(ui)/_icons/pokeball-icon"
 import { cn } from "@/lib/cn"
@@ -30,7 +31,7 @@ export default async function RootLayout({
   return (
     <html lang="en">
       <body className={cn(inter.className, "bg-identity-primary")}>
-        <Suspense fallback={<>loading</>}>
+        <Suspense fallback={<LayoutSkeleton />}>
           <main className="mx-auto flex min-h-screen w-full max-w-5xl flex-col gap-4 p-2 pb-10">
             {/* NAVBAR */}
             <nav>
