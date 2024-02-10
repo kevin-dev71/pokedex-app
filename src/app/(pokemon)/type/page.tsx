@@ -1,9 +1,9 @@
 import { Suspense } from "react"
 import type PokeAPI from "pokedex-promise-v2"
 
-import PokemonListEmpty from "@/app/(pokemon)/_components/empty-states/pokemon-list-empty"
-import PokemonListItem from "@/app/(pokemon)/_components/pokemon-list-item"
-import PokemonListSkeleton from "@/app/(pokemon)/_components/skeletons/pokemon-list-skeleton"
+import PokemonListEmpty from "@/modules/pokemon/_components/empty-states/pokemon-list-empty"
+import PokemonListItem from "@/modules/pokemon/_components/pokemon-list-item"
+import PokemonListSkeleton from "@/modules/pokemon/_components/skeletons/pokemon-list-skeleton"
 import { fetchResource } from "@/server/pokeapi/actions/fetch-resource"
 
 const PokemonTypePage = async ({

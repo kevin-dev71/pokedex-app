@@ -3,10 +3,10 @@ import type { Metadata } from "next"
 import { Inter } from "next/font/google"
 import Link from "next/link"
 
-import PokemonTypesList from "@/app/(pokemon)/_components/pokemon-types-list"
-import LayoutSkeleton from "@/app/(pokemon)/_components/skeletons/layout-skeleton"
-import PokemonTypesListSkeleton from "@/app/(pokemon)/_components/skeletons/pokemon-types-list-skeleton"
 import { cn } from "@/lib/cn"
+import PokemonTypesList from "@/modules/pokemon/_components/pokemon-types-list"
+import LayoutSkeleton from "@/modules/pokemon/_components/skeletons/layout-skeleton"
+import PokemonTypesListSkeleton from "@/modules/pokemon/_components/skeletons/pokemon-types-list-skeleton"
 import PokeballIcon from "@/modules/ui/_icons/pokeball-icon"
 import { fetchPokemonTypesList } from "@/server/pokeapi/actions/fetch-pokemon-types-list"
 
