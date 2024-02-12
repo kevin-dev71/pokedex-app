@@ -27,18 +27,10 @@ export default async function Home({
 
   // UI ADAPT
   const { results, count } = pokemonsFetchResult
-  const pokemonsWithDataArr: PokeAPI.Pokemon[] = []
 
-  // FETCH POKEMON DETAILS in Parallel
-  await Promise.allSettled(
+  const pokemonsWithDataArr = await Promise.all(
     results.map((result) => fetchResource<PokeAPI.Pokemon>(result.url))
-  ).then((promiseResults) => {
-    promiseResults.forEach((promiseResult) => {
-      if (promiseResult.status === "fulfilled") {
-        pokemonsWithDataArr.push(promiseResult.value)
-      }
-    })
-  })
+  )
 
   // APPLY FILTERS
   const filteredPokemonsWithDataArr = filterAndSortPokemons({

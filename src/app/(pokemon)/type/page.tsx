@@ -19,7 +19,7 @@ const PokemonTypePage = async ({
   if (!url) throw new Error("no url")
 
   // SERVICES
-  const result = await fetchResource<PokeAPI.Type>(url)
+  const result = await fetchResource<PokeAPI.Type>(String(url))
 
   // SERVICE
   const pokemonsWithDataArr: PokeAPI.Pokemon[] = []
