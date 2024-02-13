@@ -26,7 +26,7 @@ export default async function RootLayout({
 }>) {
   // SERVICES
   const pokemonsTypesListResult = await fetchPokemonTypesList()
-  const { results: pokemonsTypes } = pokemonsTypesListResult
+  const { results: pokemonsTypes, next } = pokemonsTypesListResult
 
   return (
     <html lang="en">
@@ -41,7 +41,7 @@ export default async function RootLayout({
               </Link>
             </nav>
             {/* POKEMON TYPES LIST */}
-            <Suspense fallback={<PokemonTypesListSkeleton />}>
+            <Suspense key={next} fallback={<PokemonTypesListSkeleton />}>
               <PokemonTypesList pokemonTypes={pokemonsTypes} />
             </Suspense>
             {children}

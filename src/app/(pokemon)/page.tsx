@@ -3,6 +3,7 @@ import type PokeAPI from "pokedex-promise-v2"
 
 import PokemonListEmpty from "@/modules/pokemon/_components/empty-states/pokemon-list-empty"
 import PokemonListItem from "@/modules/pokemon/_components/pokemon-list-item"
+import PokemonListItemSkeleton from "@/modules/pokemon/_components/skeletons/pokemon-list-item-skeleton"
 import PokemonListSkeleton from "@/modules/pokemon/_components/skeletons/pokemon-list-skeleton"
 import { filterAndSortPokemons } from "@/modules/pokemon/utils/filter-and-sort-pokemons"
 import Pagination from "@/modules/ui/_components/pagination"
@@ -28,8 +29,8 @@ export default async function Home({
   // UI ADAPT
   const { results, count } = pokemonsFetchResult
 
-  const pokemonsWithDataArr = await Promise.all(
-    results.map((result) => fetchResource<PokeAPI.Pokemon>(result.url))
+  const pokemonsWithDataArr = await fetchResource<PokeAPI.Pokemon[]>(
+    results.map((result) => result.url)
   )
 
   // APPLY FILTERS
@@ -54,13 +55,20 @@ export default async function Home({
       />
 
       {/* POKEMONLIST */}
-      <Suspense fallback={<PokemonListSkeleton />}>
+      <Suspense
+        key={currentPageParam + String(searchParams.filter) + searchParams.sortBy}
+        fallback={<PokemonListSkeleton />}
+      >
         <section className="mx-auto grid w-full grid-flow-dense grid-cols-[repeat(auto-fit,minmax(180px,1fr))] gap-3 rounded-xl bg-white px-2 pb-3 pt-3">
           {/* EMPTY STATE */}
           {filteredPokemonsWithDataArr.length === 0 && <PokemonListEmpty />}
           {/* LIST ITEMS RESULT */}
           {filteredPokemonsWithDataArr.map((pokemon) => {
-            return <PokemonListItem key={pokemon.id} pokemon={pokemon} sortBy={String(sortBy)} />
+            return (
+              <Suspense key={pokemon.id} fallback={<PokemonListItemSkeleton name={pokemon.name} />}>
+                <PokemonListItem key={pokemon.id} pokemon={pokemon} sortBy={String(sortBy)} />
+              </Suspense>
+            )
           })}
         </section>
       </Suspense>
